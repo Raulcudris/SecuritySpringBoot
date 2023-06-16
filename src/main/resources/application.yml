@@ -1,0 +1,17 @@
+server:
+  port: 6071
+  servlet:
+    contextPath: /api
+
+spring: 
+  datasource:
+    username: admin
+    password: root
+    url: "jdbc:mysql://localhost/productos"
+    
+
+  jpa:
+    hibernate:
+      ddlAuto: create
+    show-sql: true
+    
