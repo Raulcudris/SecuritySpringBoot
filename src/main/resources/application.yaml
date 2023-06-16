@@ -3,15 +3,22 @@ server:
   servlet:
     contextPath: /api
 
+
 spring: 
   datasource:
     username: admin
     password: root
-    url: "jdbc:mysql://localhost/productos"
-    
+    url: "jdbc:mysql://localhost/productos"  
 
   jpa:
     hibernate:
       ddlAuto: create
     show-sql: true
-    
+
+
+
+
+
+
+
+

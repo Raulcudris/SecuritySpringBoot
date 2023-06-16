@@ -7,6 +7,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,6 +23,9 @@ import com.security.repositories.UserRepository;
 
 @RestController
 public class PrincipalController {
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
     private UserRepository userRepository;
@@ -50,7 +54,7 @@ public class PrincipalController {
 
         UserEntity userEntity = UserEntity.builder()
                     .username(createUserDto.getUsername())
-                    .password(createUserDto.getPassword())
+                    .password(passwordEncoder.encode(createUserDto.getPassword()))
                     .email(createUserDto.getEmail())
                     .roles(roles)
                     .build();
