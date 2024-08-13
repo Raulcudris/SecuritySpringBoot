@@ -1,12 +1,9 @@
 package com.security.security.jwt;
-
 import java.util.Date;
-
 import javax.crypto.SecretKey;
-
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cglib.core.internal.Function;
 import org.springframework.stereotype.Component;
-
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -17,9 +14,10 @@ import lombok.extern.slf4j.Slf4j;
 @Component
 @Slf4j
 public class JwtUtils {
-    private String secretKey = "7639848111F24212121B445421S545125D4212S5451A51115155151100000055051";
-    private String timeExpiration ="604800";
-
+    @Value("${jwt.secret}")
+    private String secretKey;
+    @Value("${jwt.timeExpiration}")
+    private String timeExpiration;
 
     //Generar token de acceso
     public String generateAccesToken(String username){
@@ -30,8 +28,6 @@ public class JwtUtils {
                 .signWith((java.security.Key) getSignatureKey(), SignatureAlgorithm.HS256)
                 .compact();
     }
-
-
     //Validar el token de acceso
     public boolean isTokenValid(String token){
         try {
@@ -53,14 +49,11 @@ public class JwtUtils {
         return getClaim(token,Claims::getSubject);
     }
 
-
-
     //Obtener un solo claim
     public <T> T getClaim(String token, Function<Claims, T> claimsTFunction ){
        Claims claims = extractAllClaims(token);
        return claimsTFunction.apply(claims);
     }
-
 
     //Obtener todos los claims del token
     public Claims extractAllClaims(String token){
@@ -71,12 +64,9 @@ public class JwtUtils {
                     .getBody();
     }
 
-
     //Obtener firma del token
     public SecretKey getSignatureKey(){
         byte[] keyBytes = Decoders.BASE64.decode(secretKey);
         return Keys.hmacShaKeyFor(keyBytes);
     }
-
-    
 }

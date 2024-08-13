@@ -30,7 +30,6 @@ public class JwtAuthenticationFilter  extends UsernamePasswordAuthenticationFilt
         this.jwtUtils = jwtUtils;
     }
 
-
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request,
                                                 HttpServletResponse response)throws AuthenticationException {
@@ -59,7 +58,6 @@ public class JwtAuthenticationFilter  extends UsernamePasswordAuthenticationFilt
 
         return getAuthenticationManager().authenticate(authenticationToken);
     }
-
         @Override
     protected void successfulAuthentication(HttpServletRequest request, 
                                             HttpServletResponse response, 
@@ -79,9 +77,7 @@ public class JwtAuthenticationFilter  extends UsernamePasswordAuthenticationFilt
         response.setStatus(HttpStatus.OK.value());
         response.setContentType(MediaType.APPLICATION_JSON_VALUE);
         response.getWriter().flush();
-        
         super.successfulAuthentication(request, response, chain, authResult);
-    }    
-    
+    }
 
 }

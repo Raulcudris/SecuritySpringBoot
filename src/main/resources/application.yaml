@@ -3,7 +3,6 @@ server:
   servlet:
     contextPath: /api
 
-
 spring: 
   datasource:
     username: admin
@@ -12,9 +11,11 @@ spring:
 
   jpa:
     hibernate:
-      ddlAuto: create
-    show-sql: true
-
+      ddlAuto: update
+    show-sql: false
+jwt:
+  secret: 7639848111F24212121B445421S545125D4212S5451A51115155151100000055051
+  timeExpiration: 604800
 
 
 
