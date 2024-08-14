@@ -14,7 +14,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 public class JwtUtilsTest {
-
     @InjectMocks
     private JwtUtils jwtUtils;
 

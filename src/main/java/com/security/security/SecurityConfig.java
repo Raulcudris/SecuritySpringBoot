@@ -26,7 +26,7 @@ public class SecurityConfig {
     @Autowired
     JwtAuthorizationFilter authorizationFilter;
     @Bean 
-    SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity , AuthenticationManager authenticationManager ) throws Exception{
+    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity , AuthenticationManager authenticationManager ) throws Exception{
         JwtAuthenticationFilter jwtAuthenticationFilter = new JwtAuthenticationFilter(jwtUtils);
         jwtAuthenticationFilter.setAuthenticationManager(authenticationManager);
         jwtAuthenticationFilter.setFilterProcessesUrl("/login");
@@ -45,11 +45,11 @@ public class SecurityConfig {
                         .build();
     }
     @Bean
-    PasswordEncoder passwordEncoder(){
+     public PasswordEncoder passwordEncoder(){
         return new  BCryptPasswordEncoder();
     }
     @Bean
-    AuthenticationManager authenticationManager(HttpSecurity httpSecurity, PasswordEncoder passwordEncoder) throws Exception{
+    public AuthenticationManager authenticationManager(HttpSecurity httpSecurity, PasswordEncoder passwordEncoder) throws Exception{
             return httpSecurity.getSharedObject(AuthenticationManagerBuilder.class)
                                 .userDetailsService(userDetailsService)
                                 .passwordEncoder(passwordEncoder)
